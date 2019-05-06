@@ -1,9 +1,12 @@
 package main
 
 import (
-	"fmt"
+	"github.com/gin-gonic/gin"
+
+	"github.com/xuzhangze/BlogCoder/view"
 )
 
 func main() {
-	fmt.Println("Hello world!")
+	r := gin.Default()
+	r.GET("/blog/v1/hello", view.HelloHandle)
 }
