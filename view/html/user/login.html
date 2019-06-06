@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <style type="text/css">
+        h2 {color: red}
+        p {
+            color: blue;
+            margin-left: 20px;
+            background-color:red;
+            padding:20px;
+        }
+        body {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div id="title"><h2 align="center">login</h2> </div>
+        <div id="form" style="margin: 0 620px 0 620px">
+            <form action="http://148.70.137.99:8080/xblog/admin/v1/user/login" method="get" style="text-align:center">
+                <fieldset>
+                    <legend>please input login info</legend>
+                    name: <br><input id="name" name="name" type="text" placeholder="please input name">
+                    <br>
+                    password: <br><input id="password" name="password" type="password" placeholder="please input password">
+                    <br>
+                    <input type="submit" value="login">
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+

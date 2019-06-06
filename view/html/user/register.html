@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+    <style type="text/css">
+        h2 {color: red}
+        p {
+            color: blue;
+            margin-left: 20px;
+            background-color:red;
+            padding:20px;
+        }
+        form {
+            font-family: "Times New Roman";
+            font-size: 20px;
+            font-weight: normal;
+        }
+        body {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div id="title"><h2 align="center">register</h2> </div>
+    <div id="form" style="margin: 0 620px 0 620px">
+        <form action="http://148.70.137.99:8080/xblog/admin/v1/user/register" method="get">
+            <fieldset>
+                <legend>please input register info</legend>
+                name: <br><input id="name" name="name" type="text" placeholder="please input name">
+                <br>
+                password: <br><input id="password" name="password" type="password" placeholder="please input password">
+                <br>
+                <input type="submit" value="login">
+            </fieldset>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+
