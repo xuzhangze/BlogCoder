@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>blog detail page</title>
+</head>
+<body>
+    <div><h1 align="center">{{.title}}</h1> </div>
+    <br>
+    <div><h3 align="center">author: {{.author}}</h3> </div>
+    <h4>{{.publish}}</h4>
+    <hr>
+    <h5 id="blogid">{{.id}}</h5>
+    <script>
+        var id =document.getElementById("blogid");
+        id.style.display="none";
+    </script>
+    <div>{{.text}}</div>
+    <hr>
+    <div><h5>star:{{.star}}</h5><h5>browse:{{.browse}}</h5></div>
+    <div>
+        <form action="http://148.70.137.99:8080/xblog/admin/v1/text/publish" method="get">
+            <button type="button" onclick="publishaddparam()">publish</button>
+        </form>
+    </div>
+    <div>
+        <form action="http://148.70.137.99:8080/xblog/admin/v1/text/modify" method="get">
+            <button type="button" onclick="modifyaddparam()">modify</button>
+        </form>
+    </div>
+    <div>
+        <form action="http://148.70.137.99:8080/xblog/admin/v1/text/delete" method="get">
+            <button type="button" onclick="deleteaddparam()">delete</button>
+        </form>
+    </div>
+    <script>
+        function publishaddparam() {
+            var id = document.getElementById("blogid");
+            var f = document.getElementsByTagName("form")[0];
+            f.action = f.action + "?id=" + id.innerText + "&publish=1";
+            window.location.href = f.action;
+        }
+        function modifyaddparam() {
+            var id = document.getElementById("blogid");
+            var uid = document.getElementById("userid");
+            var f = document.getElementsByTagName("form")[1];
+            f.action = f.action + "?id=" + id.innerText;
+            window.location.href = f.action;
+        }
+        function deleteaddparam() {
+            var id = document.getElementById("blogid");
+            var f = document.getElementsByTagName("form")[2];
+            f.action = f.action + "?id=" + id.innerText;
+            window.location.href = f.action;
+        }
+    </script>
+</body>
+</html>

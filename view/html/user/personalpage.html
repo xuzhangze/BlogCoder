@@ -13,6 +13,16 @@
         <form action="http://148.70.137.99:8080/xblog/admin/v1/user/personal/info" method="get">
             <button type="submit">personal infomation</button>
         </form>
+        <form action="http://148.70.137.99:8080/xblog/admin/v1/text/edit" method="get">
+            <button type="button" onclick="addparam()">create blog</button>
+        </form>
     </div>
+    <script>
+        function addparam() {
+            var f = document.getElementsByTagName("form")[2];
+            f.action += "?page=0";
+            window.location.href = f.action;
+        }
+    </script>
 </body>
 </html>

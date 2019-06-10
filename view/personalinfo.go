@@ -1,7 +1,6 @@
 package view
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/wonderivan/logger"
 	"github.com/xuzhangze/BlogCoder/controller"
@@ -10,13 +9,7 @@ import (
 )
 
 func PersonalInfoHandle(c *gin.Context) {
-	fmt.Println("request: ", *c.Request)
-	id, err := c.Request.Cookie("uid")
-	fmt.Println("id: ", id)
-	fmt.Println("err: ", err)
 	uIdStr, err := c.Cookie("uid")
-	fmt.Println("uid: ", uIdStr)
-	fmt.Println("err: ", err)
 	if err != nil {
 		logger.Warn("Get cookie error, err: %v", err)
 		c.HTML(http.StatusOK, "failed.html", gin.H{
@@ -36,7 +29,7 @@ func PersonalInfoHandle(c *gin.Context) {
 		})
 	}
 
-	c.HTML(http.StatusOK, "personalinfoedit.html", gin.H{
+	c.HTML(http.StatusOK, "personalinfo.html", gin.H{
 		"code" : 1,
 		"msg" : "success",
 		"name" : user.GetUname(),

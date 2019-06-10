@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>personal infomation</title>
+</head>
+<body>
+    <div id="title"><h1 align="center">Personal Infomation</h1></div>
+    <div id="info">
+        <h3 id="name" align="center">name: {{.name}}</h3>
+        <h3 id="password" align="center">password: {{.password}}</h3>
+    </div>
+    <div id="edit" style="margin: 0 620px 0 620px">
+        <form action="http://148.70.137.99:8080/xblog/admin/v1/user/edit/personalinfo" method="get">
+            <input type="button" value="edit" onclick="addparam()">
+        </form>
+    </div>
+    <script>
+        function addparam() {
+            var f = document.getElementsByTagName("form")[0];
+            f.action = f.action + "?page=0";
+            window.location.href = f.action;
+        }
+    </script>
+</body>
+</html>

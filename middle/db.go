@@ -134,14 +134,14 @@ func UpdateValueToUserInfoTableByUserID(uId int64, password string) error {
 		return err
 	}
 
-	stmt, err := Blogdb.Prepare("UPDATE userinfo SET password=? WHERE uname=?")
+	stmt, err := Blogdb.Prepare("UPDATE userinfo SET password=? WHERE uid=?")
 	if err != nil {
 		logger.Error("Start update userinfo error, err: %v", err)
 		return err
 	}
 	res, err := stmt.Exec(password, uId)
 	if err != nil {
-		logger.Error("Give value to userinfo error, err: %v, uname: %v", err, uId)
+		logger.Error("Give value to userinfo error, err: %v, user ID: %v", err, uId)
 		return err
 	}
 	_, err = res.RowsAffected()
@@ -273,7 +273,7 @@ func SelectOfTextInfoTable(id int64) ([]TextInfo, error) {
 		return nil, err
 	}
 
-	rows,err := Blogdb.Query("SELECT * FROM userinfo WHERE id=?", id)
+	rows,err := Blogdb.Query("SELECT * FROM textinfo WHERE id=?", id)
 	if err != nil {
 		logger.Error("Get query result error, err: %v", err)
 		return nil, err
