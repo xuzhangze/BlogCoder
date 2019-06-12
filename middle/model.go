@@ -21,7 +21,7 @@ func (userinfo *UserInfo)GetUid() int64 {
 }
 
 func (userinfo *UserInfo)GetUname() string {
-	if userinfo == nil {
+	if userinfo.Uname == nil {
 		return ""
 	}
 

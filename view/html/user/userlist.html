@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
     <title>user list</title>
 </head>
 <body>
-    <div><h1 align="center">Manager Users</h1></div>
+    <div><h1 align="center">管理用户</h1></div>
     <br><hr>
     <div>
         <form id="delete" action="http://148.70.137.99:8080/xblog/admin/v1/manager/delete/user" method="get">
             <input id="input1" type="text" name="uid" placeholder="please input user id">
-            <button type="submit">delete</button>
+            <button type="submit">删除</button>
         </form>
     </div>
     <hr>
@@ -26,7 +26,7 @@
                 var users = js["data"];
                 var t = "";
                 for(var i=0; i < users.length; i++){
-                    t += "<h3>user name: " + users[i]["uname"] + "</h3><h3>password: " + users[i]["password"] + "</h3><h3>ID: " + users[i]["uid"] + "</h3><hr>";
+                    t += "<h3>用户名: " + users[i]["uname"] + "</h3><h3>密码: " + users[i]["password"] + "</h3><h3>用户ID: " + users[i]["uid"] + "</h3><hr>";
                 }
                 var f = document.getElementById("userlist");
                 f.innerHTML = t;

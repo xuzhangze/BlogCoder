@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
     <title>login</title>
     <style type="text/css">
         h2 {color: red}
@@ -31,7 +31,7 @@
 </head>
 <body>
 <div class="box">
-    <div><h2 align="center">Edit Text</h2> </div>
+    <div><h2 align="center">编辑博文</h2> </div>
 </div>
 <hr>
     <h5 id="id">{{.id}}</h5>
@@ -40,12 +40,12 @@
         id.style.display="none";
     </script>
     <form id="edit" action="http://148.70.137.99:8080/xblog/admin/v1/text/edit" method="get">
-        <input id="title" name="title" type="text" placeholder="please input title">
+        <input id="title" name="title" type="text" placeholder="请输入标题">
         <textarea id="text" name="text" rows="40" cols="40">
         {{.text}}
         </textarea>
         <p>
-            <input type="button" value="save" onclick="addparam()">
+            <input type="button" value="保存" onclick="addparam()">
         </p>
     </form>
     <script>

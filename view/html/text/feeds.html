@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
     <title>feeds</title>
     <script>
         function add(tag) {
@@ -14,16 +14,16 @@
 <body>
 <div>
     <form id="ip1" action="http://148.70.137.99:8080/xblog/admin/v1/user/register" method="get">
-        <button type="button" onclick="add('ip1')">register</button>
+        <button type="button" onclick="add('ip1')">注册</button>
     </form>
     <form id="ip2" action="http://148.70.137.99:8080/xblog/admin/v1/user/login" method="get">
-        <button type="button" onclick="add('ip2')">login</button>
+        <button type="button" onclick="add('ip2')">登录</button>
     </form>
     <form id="ip3" action="http://148.70.137.99:8080/xblog/admin/v1/user/personalpage" method="get">
-        <button type="submit">personal page</button>
+        <button type="submit">个人页</button>
     </form>
 </div>
-<div><h1 align="center">Feeds</h1> </div>
+<div><h1 align="center">首页</h1> </div>
 <br><hr>
 <div id="bloglist"></div>
 <script>
@@ -39,7 +39,7 @@
             for(var i=0; i < blogs.length; i++){
                 var hid = "a" + String(i);
                 var id = String(blogs[i]["id"]);
-                t += '<h2><a id="' + hid + '" href="http://148.70.137.99:8080/xblog/admin/v1/text/detail?id=' + id + '" onclick="addparam' + "('" + hid + "')" + '">' + blogs[i]["title"] + '</a></h2><br><p>' + blogs[i]["text"] + '</p><hr>';
+                t += '<h2><a id="' + hid + '" href="http://148.70.137.99:8080/xblog/admin/v1/text/detail?id=' + id + '" onclick="addparam' + "('" + hid + "')" + '">' + blogs[i]["title"] + '</a></h2><p>' + blogs[i]["text"] + '</p><hr>';
             }
             var f = document.getElementById("bloglist");
             f.innerHTML = t;

@@ -11,7 +11,6 @@ import (
 )
 
 func TextDetailHandle(c *gin.Context) {
-	uidStr, _ := c.Cookie("uid")
 	idStr := c.DefaultQuery("id", "")
 	if len(idStr) == 0 {
 		logger.Error("Invalid param")
@@ -21,12 +20,7 @@ func TextDetailHandle(c *gin.Context) {
 		})
 		return
 	}
-	uid, _ := strconv.ParseInt(uidStr, 10, 64)
-	user, err := controller.PersonalInfo(uid)
-	if err != nil {
-		logger.Error("Get user info error, user ID: %v, err: %v", uid, err)
-		user = middle.UserInfo{}
-	}
+
 
 	id, _ := strconv.ParseInt(idStr, 10, 64)
 	blog, err := controller.GetBlogInfoByID(id)
@@ -37,6 +31,13 @@ func TextDetailHandle(c *gin.Context) {
 			"msg" : "get blog info error",
 		})
 		return
+	}
+
+	uid := blog.GetUid()
+	user, err := controller.PersonalInfo(uid)
+	if err != nil {
+		logger.Error("Get user info error, user ID: %v, err: %v", uid, err)
+		user = middle.UserInfo{}
 	}
 
 	extraJs := blog.GetExtra()

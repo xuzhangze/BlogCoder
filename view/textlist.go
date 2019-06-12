@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/wonderivan/logger"
 	"github.com/xuzhangze/BlogCoder/controller"
+	"github.com/xuzhangze/BlogCoder/utils"
 	"net/http"
 	"strconv"
 )
@@ -45,7 +46,11 @@ func TextListHandle(c *gin.Context) {
 		idStr := strconv.FormatInt(blog.GetId(), 10)
 		data["id"] = idStr
 		data["title"] = blog.GetTitle()
-		data["text"] = blog.GetText()
+		text := blog.GetText()
+		if len(text) > utils.TEXTLENGTH {
+			text = text[:utils.TEXTLENGTH]
+		}
+		data["text"] = text
 		datas = append(datas, data)
 	}
 

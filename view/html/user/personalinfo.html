@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
     <title>personal infomation</title>
 </head>
 <body>
-    <div id="title"><h1 align="center">Personal Infomation</h1></div>
+    <div id="title"><h1 align="center">个人信息</h1></div>
     <div id="info">
-        <h3 id="name" align="center">name: {{.name}}</h3>
-        <h3 id="password" align="center">password: {{.password}}</h3>
+        <h3 id="name" align="center">名称: {{.name}}</h3>
+        <h3 id="password" align="center">密码: {{.password}}</h3>
     </div>
-    <div id="edit" style="margin: 0 620px 0 620px">
+    <div id="edit" style="margin: 0 740px 0 740px">
         <form action="http://148.70.137.99:8080/xblog/admin/v1/user/edit/personalinfo" method="get">
-            <input type="button" value="edit" onclick="addparam()">
+            <input type="button" value="修改" onclick="addparam()">
         </form>
     </div>
     <script>

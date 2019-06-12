@@ -43,7 +43,7 @@ func TextEditHandle(c *gin.Context) {
 	uId, _ := strconv.ParseInt(uIdStr, 10, 64)
 
 	var blog middle.TextInfo
-	if len(idStr) < 15 {
+	if len(idStr) < 9 {
 		blog, err = controller.TextEdit(uId, title, text)
 	} else {
 		blog, err = controller.Updatetext(id, uId, title, text)

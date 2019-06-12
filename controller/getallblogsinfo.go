@@ -29,9 +29,13 @@ func GetAllBlogsInfo(uid int64) ([]middle.TextInfo, error) {
 			logger.Warn("Json unmarshal error, err: %v", err)
 			continue
 		}
-		if publish, ok := extra["publish"]; ok {
-			if publish == flag {
-				res = append(res, blog)
+		if status, ok := extra["status"]; ok {
+			if status == flag {
+				if publish, ok := extra["publish"]; ok {
+					if publish == flag {
+						res = append(res, blog)
+					}
+				}
 			}
 		}
 	}
