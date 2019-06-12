@@ -85,6 +85,20 @@ func (userinfo *UserInfo)Select() (UserInfo, error) {
 	return users[0], nil
 }
 
+func (userinfo *UserInfo)SelectAll() ([]UserInfo, error) {
+	users, err := SelectOfUserinfoTableAll()
+	if err != nil {
+		logger.Error("Query userinfo talbe error, err: %v", err)
+		return []UserInfo{}, err
+	}
+	if len(users) == 0 {
+		logger.Warn("This element not found")
+		return []UserInfo{}, utils.ERRORNOTFOUND
+	}
+
+	return users, nil
+}
+
 func (userinfo *UserInfo)SelectByUserId() (UserInfo, error) {
 	users, err := SelectOfUserinfoTableByUserID(userinfo.GetUid())
 
@@ -228,4 +242,32 @@ func (textinfo *TextInfo)Select() (TextInfo, error) {
 	}
 
 	return textinfos[0], nil
+}
+
+func (textinfo *TextInfo)SelectByUserID() ([]TextInfo, error) {
+	textinfos, err := SelectOfTextInfoTableByUserID(textinfo.GetUid())
+	if err != nil {
+		logger.Error("Select table textinfo error, err: %v", err)
+		return []TextInfo{}, err
+	}
+	if len(textinfos) == 0 {
+		logger.Warn("Query table result is empty, id: %v", textinfo.GetId())
+		return []TextInfo{}, utils.ERRORNOTFOUND
+	}
+
+	return textinfos, nil
+}
+
+func (textinfo *TextInfo)SelectAll() ([]TextInfo, error) {
+	textinfos, err := SelectOfTextInfoTableAll()
+	if err != nil {
+		logger.Error("Select table textinfo error, err: %v", err)
+		return []TextInfo{}, err
+	}
+	if len(textinfos) == 0 {
+		logger.Warn("Query table result is empty, id: %v", textinfo.GetId())
+		return []TextInfo{}, utils.ERRORNOTFOUND
+	}
+
+	return textinfos, nil
 }

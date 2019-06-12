@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>user list</title>
+</head>
+<body>
+    <div><h1 align="center">Manager Users</h1></div>
+    <br><hr>
+    <div>
+        <form id="delete" action="http://148.70.137.99:8080/xblog/admin/v1/manager/delete/user" method="get">
+            <input id="input1" type="text" name="uid" placeholder="please input user id">
+            <button type="submit">delete</button>
+        </form>
+    </div>
+    <hr>
+    <div id="userlist"></div>
+    <script>
+        var req = new XMLHttpRequest();
+        req.open("GET", "http://148.70.137.99:8080/xblog/admin/v1/user/list", true);
+        req.send();
+        req.onreadystatechange = function () {
+            if(req.readyState==4 && req.status==200) {
+                var jsstr = req.responseText;
+                var js = JSON.parse(jsstr);
+                var users = js["data"];
+                var t = "";
+                for(var i=0; i < users.length; i++){
+                    t += "<h3>user name: " + users[i]["uname"] + "</h3><h3>password: " + users[i]["password"] + "</h3><h3>ID: " + users[i]["uid"] + "</h3><hr>";
+                }
+                var f = document.getElementById("userlist");
+                f.innerHTML = t;
+            }
+        }
+    </script>
+</body>
+</html>

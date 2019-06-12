@@ -7,8 +7,8 @@
 <body>
     <div><h1 id="title" align="center">{{.title}}</h1> </div>
     <div style="margin: 0 600px 0 600px">
-        <form action="#" method="get">
-            <button type="submit">blog list</button>
+        <form action="http://148.70.137.99:8080/xblog/admin/v1/text/all/list" method="get">
+            <button type="button" onclick="addparamv1()">blog list</button>
         </form>
         <form action="http://148.70.137.99:8080/xblog/admin/v1/user/personal/info" method="get">
             <button type="submit">personal infomation</button>
@@ -20,6 +20,11 @@
     <script>
         function addparam() {
             var f = document.getElementsByTagName("form")[2];
+            f.action += "?page=0";
+            window.location.href = f.action;
+        }
+        function addparamv1() {
+            var f = document.getElementsByTagName("form")[0];
             f.action += "?page=0";
             window.location.href = f.action;
         }

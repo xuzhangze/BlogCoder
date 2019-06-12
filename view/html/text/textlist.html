@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>all blog</title>
+    <script>
+        function addparam(tid) {
+            var a = document.getElementById(tid);
+            window.location.href = a.href;
+        }
+    </script>
+</head>
+<body>
+    <div><h1 align="center">Blog List</h1> </div>
+    <hr>
+    <h3 id="text">Text:</h3>
+    <br><hr>
+    <div id="bloglist"></div>
+    <script>
+        var req = new XMLHttpRequest();
+        req.open("GET", "http://148.70.137.99:8080/xblog/admin/v1/text/all/list", true);
+        req.send();
+        req.onreadystatechange = function () {
+            if(req.readyState==4 && req.status==200) {
+                var jsstr = req.responseText;
+                var js = JSON.parse(jsstr);
+                var blogs = js["data"];
+                var t = "";
+                for(var i=0; i < blogs.length; i++){
+                    var hid = "a" + String(i);
+                    var id = String(blogs[i]["id"]);
+                    t += '<h2><a id="' + hid + '" href="http://148.70.137.99:8080/xblog/admin/v1/text/detail?id=' + id + '" onclick="addparam' + "('" + hid + "')" + '">' + blogs[i]["title"] + '</a></h2><br><p>' + blogs[i]["text"] + '</p><hr>';
+                }
+                var f = document.getElementById("bloglist");
+                f.innerHTML = t;
+            }
+        }
+    </script>
+</body>
+</html>

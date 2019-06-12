@@ -5,6 +5,14 @@
     <title>blog detail page</title>
 </head>
 <body>
+    <div>
+        <form id="f1" action="http://148.70.137.99:8080/xblog/admin/v1/user/personalpage" method="get">
+            <button type="submit">personal page</button>
+        </form>
+        <form id="f2" action="http://148.70.137.99:8080/xblog/admin/v1/text/feeds" method="get">
+            <button type="button" onclick="addfeedsparam()">home page</button>
+        </form>
+    </div>
     <div><h1 align="center">{{.title}}</h1> </div>
     <br>
     <div><h3 align="center">author: {{.author}}</h3> </div>
@@ -19,38 +27,43 @@
     <hr>
     <div><h5>star:{{.star}}</h5><h5>browse:{{.browse}}</h5></div>
     <div>
-        <form action="http://148.70.137.99:8080/xblog/admin/v1/text/publish" method="get">
+        <form id="f3" action="http://148.70.137.99:8080/xblog/admin/v1/text/publish" method="get">
             <button type="button" onclick="publishaddparam()">publish</button>
         </form>
     </div>
     <div>
-        <form action="http://148.70.137.99:8080/xblog/admin/v1/text/modify" method="get">
+        <form id="f4" action="http://148.70.137.99:8080/xblog/admin/v1/text/modify" method="get">
             <button type="button" onclick="modifyaddparam()">modify</button>
         </form>
     </div>
     <div>
-        <form action="http://148.70.137.99:8080/xblog/admin/v1/text/delete" method="get">
+        <form id="f5" action="http://148.70.137.99:8080/xblog/admin/v1/text/delete" method="get">
             <button type="button" onclick="deleteaddparam()">delete</button>
         </form>
     </div>
     <script>
         function publishaddparam() {
             var id = document.getElementById("blogid");
-            var f = document.getElementsByTagName("form")[0];
+            var f = document.getElementById("f3");
             f.action = f.action + "?id=" + id.innerText + "&publish=1";
             window.location.href = f.action;
         }
         function modifyaddparam() {
             var id = document.getElementById("blogid");
             var uid = document.getElementById("userid");
-            var f = document.getElementsByTagName("form")[1];
+            var f = document.getElementById("f4");
             f.action = f.action + "?id=" + id.innerText;
             window.location.href = f.action;
         }
         function deleteaddparam() {
             var id = document.getElementById("blogid");
-            var f = document.getElementsByTagName("form")[2];
+            var f = document.getElementById("f5");
             f.action = f.action + "?id=" + id.innerText;
+            window.location.href = f.action;
+        }
+        function addfeedsparam() {
+            var f = document.getElementById("f2");
+            f.action += "?page=0";
             window.location.href = f.action;
         }
     </script>

@@ -39,6 +39,14 @@ func LoginHandle(c *gin.Context) {
 
 	c.SetCookie("uid", strconv.FormatInt(uId, 10), 86400, "/", "148.70.137.99:8080", false, true)
 
+	if name == "root" {
+		c.HTML(http.StatusOK, "managerpage.html", gin.H{
+			"code" : 1,
+			"msg" : "success",
+		})
+		return
+	}
+
 	c.HTML(http.StatusOK, "personalpage.html", gin.H{
 		"code" : 1,
 		"msg" : "success",

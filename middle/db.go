@@ -180,6 +180,33 @@ func SelectOfUserinfoTable(name string) ([]UserInfo, error) {
 	return result, nil
 }
 
+func SelectOfUserinfoTableAll() ([]UserInfo, error) {
+	if err := checkBlogdb(); err != nil {
+		logger.Error("DB connect error, err: %v", err)
+		return nil, err
+	}
+
+	rows,err := Blogdb.Query("SELECT * FROM userinfo")
+	if err != nil {
+		logger.Error("Get query result error, err: %v", err)
+		return nil, err
+	}
+
+	result := []UserInfo{}
+	for rows.Next() {
+		var uid int64
+		var uname, password, extra string
+		user := UserInfo{&uid, &uname, &password, &extra}
+		if err = rows.Scan(user.Uid, user.Uname, user.Password, user.Extra); err != nil {
+			logger.Error("Traversal query result error, err: %v", err)
+			return nil, err
+		}
+		result = append(result, user)
+	}
+
+	return result, nil
+}
+
 func SelectOfUserinfoTableByUserID(uId int64) ([]UserInfo, error) {
 	if err := checkBlogdb(); err != nil {
 		logger.Error("DB connect error, err: %v", err)
@@ -274,6 +301,57 @@ func SelectOfTextInfoTable(id int64) ([]TextInfo, error) {
 	}
 
 	rows,err := Blogdb.Query("SELECT * FROM textinfo WHERE id=?", id)
+	if err != nil {
+		logger.Error("Get query result error, err: %v", err)
+		return nil, err
+	}
+
+	result := []TextInfo{}
+	for rows.Next() {
+		var id, uid int64
+		var star, browse int
+		var title, text, extra string
+		textinfo := TextInfo{&id, &uid, &title, &text, &star, &browse, &extra}
+		if err = rows.Scan(textinfo.Id, textinfo.Uid, textinfo.Title, textinfo.Text, textinfo.Star, textinfo.Browse, textinfo.Extra); err != nil {
+			logger.Error("Traversal query result error, err: %v", err)
+			return nil, err
+		}
+		result = append(result, textinfo)
+	}
+
+	return result, nil
+}
+
+func SelectOfTextInfoTableByUserID(uid int64) ([]TextInfo, error) {
+	if err := checkBlogdb(); err != nil {
+		logger.Error("DB connect error, err: %v", err)
+		return nil, err
+	}
+
+	rows,err := Blogdb.Query("SELECT * FROM textinfo WHERE uid=?", uid)
+	if err != nil {
+		logger.Error("Get query result error, err: %v", err)
+		return nil, err
+	}
+
+	result := []TextInfo{}
+	for rows.Next() {
+		var id, uid int64
+		var star, browse int
+		var title, text, extra string
+		textinfo := TextInfo{&id, &uid, &title, &text, &star, &browse, &extra}
+		if err = rows.Scan(textinfo.Id, textinfo.Uid, textinfo.Title, textinfo.Text, textinfo.Star, textinfo.Browse, textinfo.Extra); err != nil {
+			logger.Error("Traversal query result error, err: %v", err)
+			return nil, err
+		}
+		result = append(result, textinfo)
+	}
+
+	return result, nil
+}
+
+func SelectOfTextInfoTableAll() ([]TextInfo, error) {
+	rows,err := Blogdb.Query("SELECT * FROM textinfo")
 	if err != nil {
 		logger.Error("Get query result error, err: %v", err)
 		return nil, err

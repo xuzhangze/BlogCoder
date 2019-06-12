@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>feeds</title>
+    <script>
+        function add(tag) {
+            var f = document.getElementById(tag);
+            f.action += "?page=0";
+            window.location.href = f.action;
+        }
+    </script>
+</head>
+<body>
+<div>
+    <form id="ip1" action="http://148.70.137.99:8080/xblog/admin/v1/user/register" method="get">
+        <button type="button" onclick="add('ip1')">register</button>
+    </form>
+    <form id="ip2" action="http://148.70.137.99:8080/xblog/admin/v1/user/login" method="get">
+        <button type="button" onclick="add('ip2')">login</button>
+    </form>
+    <form id="ip3" action="http://148.70.137.99:8080/xblog/admin/v1/user/personalpage" method="get">
+        <button type="submit">personal page</button>
+    </form>
+</div>
+<div><h1 align="center">Feeds</h1> </div>
+<br><hr>
+<div id="bloglist"></div>
+<script>
+    var req = new XMLHttpRequest();
+    req.open("GET", "http://148.70.137.99:8080/xblog/admin/v1/text/feeds", true);
+    req.send();
+    req.onreadystatechange = function () {
+        if(req.readyState==4 && req.status==200) {
+            var jsstr = req.responseText;
+            var js = JSON.parse(jsstr);
+            var blogs = js["data"];
+            var t = "";
+            for(var i=0; i < blogs.length; i++){
+                var hid = "a" + String(i);
+                var id = String(blogs[i]["id"]);
+                t += '<h2><a id="' + hid + '" href="http://148.70.137.99:8080/xblog/admin/v1/text/detail?id=' + id + '" onclick="addparam' + "('" + hid + "')" + '">' + blogs[i]["title"] + '</a></h2><br><p>' + blogs[i]["text"] + '</p><hr>';
+            }
+            var f = document.getElementById("bloglist");
+            f.innerHTML = t;
+        }
+    }
+</script>
+</body>
+</html>

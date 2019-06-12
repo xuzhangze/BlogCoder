@@ -8,35 +8,24 @@ import (
 	"strconv"
 )
 
-func TextDeleteHandle(c *gin.Context) {
-	uidStr, _ := c.Cookie("uid")
-	idStr := c.DefaultQuery("id", "")
-	if len(idStr) == 0 {
-		logger.Warn("Parameter is invalid")
+func UserPersonalPageHandle(c *gin.Context) {
+	uidStr, err := c.Cookie("uid")
+	if err != nil {
+		logger.Warn("Get user cookie error")
 		c.HTML(http.StatusOK, "failed.html", gin.H{
 			"code" : 0,
-			"msg" : "invalid parameter",
+			"msg" : "get coockie error",
 		})
 		return
 	}
 
 	uid, _ := strconv.ParseInt(uidStr, 10, 64)
-	id, _ := strconv.ParseInt(idStr, 10, 64)
-	if err := controller.TextDelete(id, uid); err != nil {
-		logger.Error("Blog delete error, blog ID: %v, err: %v", id, err)
-		c.HTML(http.StatusOK, "failed.html", gin.H{
-			"code" : 0,
-			"msg" : "unknow error",
-		})
-		return
-	}
-
 	user, err := controller.PersonalInfo(uid)
-	if err != nil{
+	if err != nil {
 		logger.Error("Get user info error, user ID: %v, err: %v", uid, err)
 		c.HTML(http.StatusOK, "failed.html", gin.H{
 			"code" : 0,
-			"msg" : "get user info error",
+			"msg" : "unknow error",
 		})
 		return
 	}

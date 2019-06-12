@@ -4,9 +4,10 @@ import (
 	"encoding/json"
 	"github.com/wonderivan/logger"
 	"github.com/xuzhangze/BlogCoder/middle"
+	"github.com/xuzhangze/BlogCoder/utils"
 )
 
-func TextDelete(id int64) error {
+func TextDelete(id, uid int64) error {
 	textinfo := middle.TextInfo{
 		Id: &id,
 	}
@@ -14,6 +15,12 @@ func TextDelete(id int64) error {
 	if err != nil {
 		logger.Error("Blog select error, blog ID: %v, err: %v", id, err)
 		return err
+	}
+
+	blogUid := blog.GetUid()
+	if blogUid != uid && uid != 4422517098958290944 {
+		logger.Error("Not delete jurisdiction, blog user ID: %v, option user ID: %v", blogUid, uid)
+		return utils.ERRORUNKNOW
 	}
 
 	extra := map[string]interface{}{}

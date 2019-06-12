@@ -23,7 +23,7 @@ func TextPublishHandle(c *gin.Context)  {
 		return
 	}
 
-	blog, err := controller.TextPublish(id, 1)
+	blog, err := controller.TextPublish(id, uid, 1)
 	if err != nil {
 		logger.Error("Blog publish error, blog ID: %v, err: %v", id, err)
 		c.HTML(http.StatusOK, "failed.html", gin.H{

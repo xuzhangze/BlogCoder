@@ -1,7 +1,6 @@
 package view
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/wonderivan/logger"
 	"github.com/xuzhangze/BlogCoder/controller"
@@ -34,7 +33,6 @@ func TextEditHandle(c *gin.Context) {
 	title := c.DefaultQuery("title", "")
 	text := c.DefaultQuery("text", "")
 	idStr := c.DefaultQuery("id", "")
-	fmt.Println("blog ID: ", idStr)
 	if len(title)==0 || len(text)==0 || len(idStr)==0 {
 		logger.Warn("Parameter is invalid")
 		c.HTML(http.StatusOK, "failed.html", gin.H{"code" : 0})
@@ -48,7 +46,7 @@ func TextEditHandle(c *gin.Context) {
 	if len(idStr) < 15 {
 		blog, err = controller.TextEdit(uId, title, text)
 	} else {
-		blog, err = controller.Updatetext(id, title, text)
+		blog, err = controller.Updatetext(id, uId, title, text)
 	}
 	if err != nil {
 		logger.Error("Edit blog error, user ID: %v, err: %v", uId, err)
